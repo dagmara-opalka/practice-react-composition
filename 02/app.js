@@ -1,21 +1,27 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-
-import List from './List';
 import Form from './Form';
+import List from './List';
 
 class App extends React.Component {
     state = {
-        usersList: [],
+        usersList: [],  // Lista użytkowników
+    }
+
+    // Funkcja do dodawania użytkownika do listy
+    addUser = (name) => {
+        this.setState(prevState => ({
+            usersList: [...prevState.usersList, name]
+        }));
     }
 
     render() {
-        const  { usersList } = this.state;
+        const { usersList } = this.state;
 
         return (
             <section>
-                <Form />
-                <List items={ usersList } />
+                <Form addUser={this.addUser} />
+                <List items={usersList} />
             </section>
         )
     }
